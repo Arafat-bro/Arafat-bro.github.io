@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recent photos-Sirajuddaula</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="./css/styles.css">
+    <!-- Custom CSS for Fixed Height and Captions -->
+    <style>
+        /* Set a fixed height for the carousel */
+        .carousel-inner {
+            height: 500px; /* Adjust this value as needed */
+            position: relative; /* Ensure captions are positioned relative to this container */
+        }
+
+        /* Ensure images cover the entire carousel area */
+        .carousel-item img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover; /* Ensures the image covers the area without distortion */
+        }
+
+        /* Style for captions */
+        .carousel-caption {
+            position: absolute; /* Position captions absolutely within the carousel item */
+            bottom: 10%; /* Adjust this value to control vertical placement */
+            left: 50%; /* Center horizontally */
+            transform: translateX(-50%); /* Center horizontally */
+            background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            padding: 15px;
+            border-radius: 10px;
+            width: 80%; /* Adjust width as needed */
+            max-width: 600px; /* Limit maximum width */
+            text-align: center;
+        }
+        .carousel-caption h5 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .carousel-caption p {
+            font-size: 1rem;
+            margin-bottom: 0;
+        }
+        @media (max-width: 768px) {
+            .carousel-inner {
+                height: 300px; /* Smaller height for mobile devices */
+            }
+            .carousel-caption {
+                width: 90%; /* Wider captions on smaller screens */
+                padding: 10px; /* Smaller padding */
+            }
+            .carousel-caption h5 {
+                font-size: 1.2rem; /* Smaller font size */
+            }
+            .carousel-caption p {
+                font-size: 0.9rem; /* Smaller font size */
+            }
+        }
+        .gallery {
+            padding: 60px 0;
+        }
+        .gallery img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: block;
+        }
+        .gallery img:hover {
+            transform: scale(1.05); /* Zoom effect on hover */
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3); /* Shadow effect on hover */
+        }
+        .gallery-item {
+            margin-bottom: 30px;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+        .gallery-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+        .gallery-item {
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 20px;
+    }
+
+    .image-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    .image-container img {
+        width: 100%;
+        height: 300px;
+        display: block;
+        transition: transform 0.3s ease;
+    }
+
+    .overlay {
+        position: absolute;
+        bottom: -100%;
+        left: 0;
+        width: 100%;
+        height: 20%;
+        background: rgba(43, 41, 41, 0.7);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        transition: bottom 0.3s ease;
+    }
+
+    .overlay .text {
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+
+    .gallery-item:hover .overlay {
+        bottom: 0;
+        left: 0;
+    }
+
+    .gallery-item:hover img {
+        transform: scale(1.05);
+    }
+    .hidden {
+            display: none;
+        }
+    /* Footer Styles */
+    footer {
+            background: linear-gradient(135deg, #1e3c72, #6d1230); /* Gradient background */
+            color: white;
+            padding: 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated Background */
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/always-grey.png'); /* Subtle texture */
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        /* Footer Content */
+        .footer-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .footer-content h3 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .footer-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            animation: fadeIn 2.5s ease-in-out;
+        }
+
+        /* Contact Info */
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: #1abc9c; /* Highlight color on hover */
+        }
+
+        .contact-info i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        /* Thank You Text */
+        .thank-you {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1abc9c;
+            animation: bounce 2s infinite;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .footer-content h3 {
+                font-size: 2rem;
+            }
+
+            .footer-content p {
+                font-size: 1rem;
+            }
+
+            .contact-info {
+                gap: 20px;
+            }
+
+            .thank-you {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Hero/Banner Section with Carousel -->
+<section id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+    <!-- Carousel Indicators (Dot Buttons) -->
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 5"></button>
+    </div>
+    
+    <!-- Carousel Slides -->
+    <div class="carousel-inner">
+        <!-- Slide 1 -->
+        <div class="carousel-item active">
+            <img src="assets/img/conf.webp" class="d-block w-100" alt="Slide 5">
+            <!-- Caption for Slide 5 -->
+            <div class="carousel-caption">
+                <h5>Attended a Int'l conference</h5>
+                <p>Attended in 23rd SCAC international conference held in Dhaka</p>
+            </div>
+        </div>
+        
+        <!-- Back Button to Redirect -->
+        <div class="carousel-item">
+            <img src="assets/img/f_sur.jpg" class="d-block w-100" loading="lazy" alt="Slide 4">
+            <!-- Caption for Slide 4 -->
+            <div class="carousel-caption">
+                <h5>Field survey</h5>
+                <p>Field measurement for getting accurate data to grow crops</p>
+            </div>
+        </div>
+        <!-- Slide 2 -->
+        <div class="carousel-item">
+            <img src="assets/img/lab1.webp" class="d-block w-100" loading="lazy" alt="Slide 2">
+            <!-- Caption for Slide 2 -->
+            <div class="carousel-caption">
+                <h5>Unveiling plant secrets</h5>
+                <p>Analyzing physiological response in the lab</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="assets/img/GIS_certification.webp" class="d-block w-100" alt="Slide 1">
+            <!-- Caption for Slide 1 -->
+            <div class="carousel-caption">
+                <h5>GIS workshop certificate</h5>
+                <p>Recieving prize and certificate of GIS workshop from Vice-chancellor</p>
+            </div>
+        </div>
+
+        <!-- Slide 4 -->
+        
+
+        <!-- Slide 5 -->
+        
+    </div>
+    
+    <!-- Previous and Next Buttons -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</section>
+
+<!-- Gallery Section -->
+<section class="gallery">
+    <div class="container">
+        <!-- Gallery Title -->
+        <h2 class="gallery-title">Gallery</h2>
+
+        <!-- Gallery Grid -->
+        <div class="row images">
+            <div class="col-md-4 col-sm-6 gallery-item">
+                <div class="image-container">
+                    <img src="assets/img/conf.webp" alt="Gallery Image 5" loading="lazy" class="img-fluid">
+                    <div class="overlay">
+                        <div class="text">Attending in int'l conference</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Image 2 -->
+            <div class="col-md-4 col-sm-6 gallery-item">
+                <div class="image-container">
+                    <img src="assets/img/seedling.jpg" loading="lazy" alt="Gallery Image 2" class="img-fluid">
+                    <div class="overlay">
+                        <div class="text">Seedling nurturing through fertilization</div>
+                    </div>
+                </div>
+            </div>
+            <!-- Image 4 -->
+            <div class="col-md-4 col-sm-6 gallery-item">
+                <div class="image-container">
+                    <img src="assets/img/Mungbean crop data collection.jpg" loading="lazy" alt="Gallery Image 4" class="img-fluid">
+                    <div class="overlay">
+                        <div class="text">Mung bean crop data collection</div>
+                    </div>
+                </div>
+            </div>
+            <!-- Image 3 -->
+            <div class="col-md-4 col-sm-6 gallery-item hidden">
+                <div class="image-container">
+                    <img src="assets/img/IMG20250120101340 (1).jpg" loading="lazy" alt="Gallery Image 3" class="img-fluid">
+                    <div class="overlay">
+                        <div class="text">sowing rice seedling</div>
+                    </div>
+                </div>
+            </div>
+            <!-- Image 1 -->
+            <div class="col-md-4 col-sm-6 gallery-item hidden">
+                <div class="image-container">
+                    <img src="assets/img/rice field care.webp" loading="lazy" alt="Gallery Image 1" class="img-fluid">
+                    <div class="overlay">
+                        <div class="text">Rice Field Care</div>
+                    </div>
+                </div>
+            </div>
+            <!-- Image 5 -->
+            <div class="col-md-4 col-sm-6 gallery-item hidden">
+                <div class="image-container">
+                    <img src="assets/img/team.jpg" alt="Gallery Image 5" loading="lazy" class="img-fluid">
+                    <div class="overlay">
+                        <div class="text">Working with labmates</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Image 6 -->
+            <div class="col-md-4 col-sm-6 gallery-item hidden">
+                <div class="image-container">
+                    <img src="assets/img/fung.jpg" alt="Gallery Image 6" loading="lazy" class="img-fluid">
+                    <div class="overlay">
+                        <div class="text">Fungicide application on Quinoa plant</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="btn text-center btn-primary load-more">Load More</button>
+
+    </div>
+</section>
+<div class="text-center">
+    <a href="./index.html" class="btn btn-secondary nav-bg border-0 text-light mb-3"><i class="fa-solid fa-arrow-left"></i> Back</a>
+</div>
+<section>
+    <footer>
+        <div class="footer-content">
+            <h3>Let's Connect!</h3>
+            <p>Feel free to reach out for collaborations, questions, or just a friendly chat.</p>
+
+            <!-- Contact Info -->
+            <div class="contact-info">
+                <a href="mailto:kbdarafat.sau78@gmail.com">
+                    <i class="fas fa-envelope"></i> kbdarafat.sau78@gmail.com
+                </a>
+                <a href="tel:+8801521256199">
+                    <i class="fas fa-phone"></i> +8801521256199
+                </a>
+                <a href="https://www.linkedin.com/in/sirajuddaula-arafat/" target="_blank">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                </a>
+                <a href="https://www.researchgate.net/profile/Muhammad-Sirajuddaula/research" target="_blank">
+                    <i class="fab fa-researchgate"></i> ResearchGate
+                </a>
+            </div>
+
+            <!-- Eye-Catching Thank You Text -->
+            <p class="thank-you">Thank You for Visiting! 🌿</p>
+        </div>
+    </footer>
+</section>
+
+<!-- Bootstrap JS and Dependencies -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" defer></script>
+<script>
+    document.querySelector(".load-more").addEventListener("click", function() {
+        let hiddenImages = document.querySelectorAll(".images .hidden");
+        hiddenImages.forEach(img => img.classList.remove("hidden"));
+        this.style.display = "none"; // Hide button after all images are shown
+    });
+</script>
+</body>
+</html>
