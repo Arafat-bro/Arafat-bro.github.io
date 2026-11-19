@@ -20,8 +20,7 @@
     "year": 2025,
     "doi": "10.26480/bda.01.2025.20.24",
     "url": "https://bigdatainagriculture.com/optimizing-lentil-yield-the-role-of-genetic-diversity-and-modern-breeding-approaches/",
-    "status": "Published",
-    "description": "Contributed to data analysis and manuscript formatting."
+    "status": "Published"
   },
   {
     "title": "A TensorFlow-Based CNN Model for Widespread Detection of Rice and Potato Leaf Diseases.",
@@ -34,7 +33,6 @@
     "title": "Genome Dosage Shapes Durable Disease Resistance in Polyploid Horticultural Crops.",
     "authors": "Sirajuddaula, M., Hossain, M.D., et al. ",
     "journal": "Horticulture, Environment and Biotechnology ",
-    "year": -1,
     "status": "Under review"
   },
   {
