@@ -4,7 +4,8 @@
     "authors": "Zohora, F.T., Sirajuddaula, M., Akhter, S., Debnath, O., Hossain, IN., Rubel, M.A.A., Islam, N., Kabir, M. H.",
     "journal": "Journal of Agriculture, Food and Environment",
     "year": 2026,
-    "status": "Published <br/>"
+    "status": "Published <br/>",
+    "description": "<br/>"
   },
   {
     "title": "Growth and Physiological Response of Strawberry under Salt Stress: Role of Glycine Betaine and Seaweed Extract.",
@@ -12,7 +13,8 @@
     "journal": "Journal of Agriculture, Food and Environment",
     "year": 2026,
     "doi": "https://doi.org/10.47440/JAFE.2026.7102",
-    "status": "Published <br/>"
+    "status": "Published <br/>",
+    "description": "<br/>"
   },
   {
     "title": "Optimizing Lentil Yield: The Role of Genetic Diversity and Modern Breeding Approaches",
@@ -34,26 +36,30 @@
     "title": "Genome Dosage Shapes Durable Disease Resistance in Polyploid Horticultural Crops.",
     "authors": "Sirajuddaula, M., Hossain, M.D., et al. ",
     "journal": "Horticulture, Environment and Biotechnology ",
-    "status": "Under review"
+    "status": "Under review",
+    "description": "<br/>"
   },
   {
     "title": "Symbiosis to Seed Quality: Harnessing Biological Nitrogen Fixation for Seed Germination, Vigour, And Shelf Life",
     "authors": "Deepo, D.M., Sirajuddaula, M., Hossain, M. et al. ",
     "journal": "Seeds",
     "doi": "https://doi.org/10.20944/preprints202611.1485.v1",
-    "status": "Under review"
+    "status": "Under review",
+    "description": "<br/>"
   },
   {
     "title": "Root Resilience Traits for Breeding Combined Stress-Tolerant Tomato: Mechanisms, Breeding Approaches, and Microbiome Integration",
     "authors": "Sirajuddaula, M., Siddique, A.B., Hossain, M.Y. et al. ",
     "journal": "Journal of Plant Growth Regulation ",
     "year": 0,
-    "status": "Under review"
+    "status": "Under review",
+    "description": "<br/>"
   },
   {
     "title": "Genome-wide identification, characterization, and expression profiling of the SAP gene family in cultivated strawberry (Fragaria × ananassa) in response to salt stress",
     "authors": "Sirajuddaula, M., Hossain, M.Y., Parveen, S. et al.",
-    "status": "In preparation"
+    "status": "In preparation",
+    "description": "<br/>"
   },
   {
     "title": "Meta-Analysis of Quantitative Trait Loci (QTL) Associated with Secondary Metabolites and Quality Attributes in a Beverage Crop",
