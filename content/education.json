@@ -1,0 +1,28 @@
+[
+  {
+    "degree": "Master of Science",
+    "institution": "Sher-e-Bangla Agricultural University, Dhaka, Bangladesh",
+    "department": "Genetics and Plant Breeding",
+    "start_date": "August 2024",
+    "end_date": "Present",
+    "status": "Ongoing",
+    "description": "Expected completion: December 2026."
+  },
+  {
+    "degree": "Bachelor of Science in Agriculture",
+    "institution": "Sher-e-Bangla Agricultural University, Dhaka, Bangladesh",
+    "department": "Faculty of Agriculture",
+    "start_date": "January 2019",
+    "end_date": "December 2022",
+    "status": "Completed",
+    "grade": "CGPA: 3.49 out of 4.00",
+    "description": "Final result published in June 2024."
+  },
+  {
+    "degree": "Higher Secondary Certificate",
+    "institution": "Govt. Science College, Dhaka",
+    "department": "Science",
+    "status": "Completed",
+    "grade": "GPA: 4.78 out of 5.00"
+  }
+]

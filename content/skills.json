@@ -1,0 +1,31 @@
+[
+  {
+    "category": "Lab and Field Skills",
+    "items": [
+      "Fluorescence measurement",
+      "Handling SPAD meter, moisture meter, EC meter, and centrifuge",
+      "Spectrophotometer handling",
+      "Crop morphological data collection",
+      "Practical understanding of experimental methodology"
+    ]
+  },
+  {
+    "category": "Data Analysis",
+    "items": [
+      "R programming and RStudio",
+      "SPSS",
+      "Basic GIS and ArcGIS",
+      "Basic Python"
+    ]
+  },
+  {
+    "category": "Software Proficiency",
+    "items": [
+      "Microsoft Word",
+      "Microsoft Excel",
+      "Microsoft PowerPoint",
+      "Canva",
+      "R"
+    ]
+  }
+]

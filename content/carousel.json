@@ -1,0 +1,22 @@
+[
+  {
+    "title": "International Conference",
+    "caption": "Attended the 23rd Science Council of Asia international conference held in Dhaka.",
+    "image": "assets/img/conf.webp"
+  },
+  {
+    "title": "Field Survey",
+    "caption": "Field measurements for accurate crop data collection.",
+    "image": "assets/img/f_sur.jpg"
+  },
+  {
+    "title": "Plant Physiology Research",
+    "caption": "Analyzing physiological responses in the laboratory.",
+    "image": "assets/img/lab1.webp"
+  },
+  {
+    "title": "GIS Workshop Certificate",
+    "caption": "Receiving a prize and certificate at a GIS workshop.",
+    "image": "assets/img/GIS_certification.webp"
+  }
+]

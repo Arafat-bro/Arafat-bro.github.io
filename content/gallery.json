@@ -1,0 +1,37 @@
+[
+  {
+    "title": "International Conference",
+    "image": "assets/img/conf.webp",
+    "caption": "Attending an international conference."
+  },
+  {
+    "title": "Seedling Nurturing",
+    "image": "assets/img/seedling.jpg",
+    "caption": "Seedling nurturing through fertilization."
+  },
+  {
+    "title": "Mung Bean Data Collection",
+    "image": "assets/img/Mungbean crop data collection.jpg",
+    "caption": "Mung bean crop data collection."
+  },
+  {
+    "title": "Rice Seedling",
+    "image": "assets/img/IMG20250120101340 (1).jpg",
+    "caption": "Sowing rice seedlings."
+  },
+  {
+    "title": "Rice Field Care",
+    "image": "assets/img/rice field care.webp",
+    "caption": "Rice field care."
+  },
+  {
+    "title": "Laboratory Team",
+    "image": "assets/img/team.jpg",
+    "caption": "Working with labmates."
+  },
+  {
+    "title": "Quinoa Research",
+    "image": "assets/img/fung.jpg",
+    "caption": "Fungicide application on quinoa plants."
+  }
+]
