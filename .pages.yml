@@ -26,7 +26,12 @@ content:
       - { name: linkedin, label: LinkedIn, type: string }
       - { name: researchgate, label: ResearchGate, type: string }
       - { name: orcid, label: ORCID, type: string }
-      - { name: cv_file, label: Current CV, type: file }
+      - name: cv_file
+        label: Current CV
+        type: file
+        options:
+          media: documents
+          extensions: [pdf]
 
   - name: experience
     label: Research and Employment
