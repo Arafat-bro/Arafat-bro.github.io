@@ -12,6 +12,76 @@ window.addEventListener('DOMContentLoaded', async () => {
         return n;
     };
 
+    const appendFormatted = (parent, value) => {
+        if (typeof value !== 'string' || !value.trim()) return;
+
+        let html = value;
+
+        // Decode HTML tags escaped by the CMS.
+        for (let i = 0; i < 2 && /&lt;\/?[a-z][^&]*&gt;/i.test(html); i++) {
+            html = new DOMParser().parseFromString(html, 'text/html').body.textContent;
+        }
+
+        const parsed = new DOMParser().parseFromString(html, 'text/html');
+
+        const allowed = new Set([
+            'P', 'BR', 'B', 'STRONG', 'I', 'EM', 'U',
+            'S', 'DEL', 'INS', 'SUB', 'SUP',
+            'UL', 'OL', 'LI', 'BLOCKQUOTE',
+            'CODE', 'PRE', 'A',
+            'H2', 'H3', 'H4', 'H5', 'H6'
+        ]);
+
+        const blocked = new Set([
+            'SCRIPT', 'STYLE', 'IFRAME', 'OBJECT',
+            'EMBED', 'SVG', 'MATH', 'FORM'
+        ]);
+
+        const copyNode = (source, destination) => {
+            if (source.nodeType === Node.TEXT_NODE) {
+                const lines = source.textContent.split(/\r?\n/);
+                lines.forEach((line, index) => {
+                    if (line) destination.append(document.createTextNode(line));
+                    if (index < lines.length - 1) {
+                        destination.append(document.createElement('br'));
+                    }
+                });
+                return;
+            }
+
+            if (source.nodeType !== Node.ELEMENT_NODE) return;
+
+            const tag = source.tagName;
+            if (blocked.has(tag)) return;
+
+            const target = allowed.has(tag)
+                ? document.createElement(tag.toLowerCase())
+                : destination;
+
+            if (tag === 'A' && allowed.has(tag)) {
+                const href = source.getAttribute('href') || '';
+                try {
+                    const url = new URL(href, document.baseURI);
+                    if (['http:', 'https:', 'mailto:'].includes(url.protocol)) {
+                        target.setAttribute('href', href);
+                        target.setAttribute('target', '_blank');
+                        target.setAttribute('rel', 'noopener noreferrer');
+                    }
+                } catch (_) {}
+            }
+
+            if (target !== destination) destination.append(target);
+
+            Array.from(source.childNodes).forEach(child => {
+                copyNode(child, target);
+            });
+        };
+
+        Array.from(parsed.body.childNodes).forEach(node => {
+            copyNode(node, parent);
+        });
+    };
+
     try {
         const [slides, photos] = await Promise.all([
             read('carousel'),
@@ -46,10 +116,8 @@ window.addEventListener('DOMContentLoaded', async () => {
                 img.loading = i === 0 ? 'eager' : 'lazy';
 
                 const caption = el('div', 'carousel-caption');
-                caption.append(
-                    el('h5', '', x.title || ''),
-                    el('p', '', x.caption || '')
-                );
+                caption.append(el('h5', '', x.title || ''));
+                appendFormatted(caption, x.caption);
                 slide.append(img, caption);
                 inner.append(slide);
             });
@@ -78,7 +146,9 @@ window.addEventListener('DOMContentLoaded', async () => {
                 img.loading = 'lazy';
 
                 const overlay = el('div', 'overlay');
-                overlay.append(el('div', 'text', x.caption || x.title || ''));
+                const overlayText = el('div', 'text');
+                appendFormatted(overlayText, x.caption || x.title || '');
+                overlay.append(overlayText);
 
                 container.append(img, overlay);
                 column.append(container);

@@ -15,6 +15,77 @@ window.addEventListener('DOMContentLoaded', () => {
     const load = (name, callback) =>
         get(name).then(callback).catch(e => console.error(e));
 
+    // Render multiline CMS text as paragraphs and semantic lists.
+    const appendFormatted = (parent, value) => {
+        if (typeof value !== 'string' || !value.trim()) return;
+
+        let html = value;
+
+        // Decode HTML tags escaped by the CMS.
+        for (let i = 0; i < 2 && /&lt;\/?[a-z][^&]*&gt;/i.test(html); i++) {
+            html = new DOMParser().parseFromString(html, 'text/html').body.textContent;
+        }
+
+        const parsed = new DOMParser().parseFromString(html, 'text/html');
+
+        const allowed = new Set([
+            'P', 'BR', 'B', 'STRONG', 'I', 'EM', 'U',
+            'S', 'DEL', 'INS', 'SUB', 'SUP',
+            'UL', 'OL', 'LI', 'BLOCKQUOTE',
+            'CODE', 'PRE', 'A',
+            'H2', 'H3', 'H4', 'H5', 'H6'
+        ]);
+
+        const blocked = new Set([
+            'SCRIPT', 'STYLE', 'IFRAME', 'OBJECT',
+            'EMBED', 'SVG', 'MATH', 'FORM'
+        ]);
+
+        const copyNode = (source, destination) => {
+            if (source.nodeType === Node.TEXT_NODE) {
+                const lines = source.textContent.split(/\r?\n/);
+                lines.forEach((line, index) => {
+                    if (line) destination.append(document.createTextNode(line));
+                    if (index < lines.length - 1) {
+                        destination.append(document.createElement('br'));
+                    }
+                });
+                return;
+            }
+
+            if (source.nodeType !== Node.ELEMENT_NODE) return;
+
+            const tag = source.tagName;
+            if (blocked.has(tag)) return;
+
+            const target = allowed.has(tag)
+                ? document.createElement(tag.toLowerCase())
+                : destination;
+
+            if (tag === 'A' && allowed.has(tag)) {
+                const href = source.getAttribute('href') || '';
+                try {
+                    const url = new URL(href, document.baseURI);
+                    if (['http:', 'https:', 'mailto:'].includes(url.protocol)) {
+                        target.setAttribute('href', href);
+                        target.setAttribute('target', '_blank');
+                        target.setAttribute('rel', 'noopener noreferrer');
+                    }
+                } catch (_) {}
+            }
+
+            if (target !== destination) destination.append(target);
+
+            Array.from(source.childNodes).forEach(child => {
+                copyNode(child, target);
+            });
+        };
+
+        Array.from(parsed.body.childNodes).forEach(node => {
+            copyNode(node, parent);
+        });
+    };
+
     const validUrl = value => {
         try {
             const u = new URL(value);
@@ -40,7 +111,11 @@ window.addEventListener('DOMContentLoaded', () => {
         text('profileNavName', profile.display_name);
         text('profileHeadline', profile.headline);
         text('profileLocation', profile.location);
-        text('profileBio', profile.bio);
+        const bio = document.getElementById('profileBio');
+        if (bio) {
+            bio.replaceChildren();
+            appendFormatted(bio, profile.bio);
+        }
 
         const image = document.getElementById('profileImage');
         if (image && profile.profile_image) {
@@ -78,7 +153,8 @@ window.addEventListener('DOMContentLoaded', () => {
             if (x.organization)
                 heading.append(document.createTextNode(x.organization));
 
-            main.append(heading, el('p', '', x.description || ''));
+            main.append(heading);
+            appendFormatted(main, x.description);
             const dates = `${x.start_date || ''}${x.start_date && x.end_date ? ' to ' : ''}${x.end_date || ''}`;
             const dateBox = el('div', 'flex-shrink-0');
             dateBox.append(el('span', 'text-primary', dates));
@@ -104,7 +180,7 @@ window.addEventListener('DOMContentLoaded', () => {
             if (x.department) main.append(el('div', '', x.department));
             if (x.grade) main.append(el('p', 'mb-1', x.grade));
             if (x.status) main.append(el('p', 'mb-1', x.status));
-            if (x.description) main.append(el('p', '', x.description));
+            appendFormatted(main, x.description);
 
             const dates = `${x.start_date || ''}${x.start_date && x.end_date ? ' to ' : ''}${x.end_date || ''}`;
             const dateBox = el('div', 'flex-shrink-0');
@@ -191,8 +267,11 @@ window.addEventListener('DOMContentLoaded', () => {
                 target.append(li);
             }
 
-            if (x.description)
-                target.append(el('li', 'mb-3', x.description));
+            if (x.description) {
+                const description = el('li', 'mb-3');
+                appendFormatted(description, x.description);
+                target.append(description);
+            }
         });
     });
 
@@ -202,8 +281,8 @@ window.addEventListener('DOMContentLoaded', () => {
             const target = document.getElementById(`${name}Content`);
             if (!target) return;
             target.replaceChildren();
-            (data.paragraphs || []).forEach((paragraph, i, all) => {
-                target.append(el('p', i === all.length - 1 ? 'mb-0' : '', paragraph));
+            (data.paragraphs || []).forEach(paragraph => {
+                appendFormatted(target, paragraph);
             });
         });
     });
@@ -218,13 +297,14 @@ window.addEventListener('DOMContentLoaded', () => {
             const li = el('li');
             const marker = el('span', 'fa-li');
             marker.append(el('i', 'fas fa-trophy text-warning'));
-            const description = [
+            const details = el('span');
+            details.textContent = [
                 x.title,
                 x.issuer ? `, ${x.issuer}` : '',
-                x.date ? ` (${x.date})` : '',
-                x.description ? `. ${x.description}` : ''
+                x.date ? ` (${x.date})` : ''
             ].join('');
-            li.append(marker, document.createTextNode(description));
+            li.append(marker, details);
+            if (x.description) appendFormatted(li, x.description);
             target.append(li);
         });
     });
