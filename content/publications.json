@@ -19,43 +19,45 @@
     "journal": "Big Data in Agriculture",
     "year": 2025,
     "doi": "10.26480/bda.01.2025.20.24",
-    "status": "Published <br/>"
+    "status": "Published",
+    "description": "<br/>"
   },
   {
     "title": "A TensorFlow-Based CNN Model for Widespread Detection of Rice and Potato Leaf Diseases.",
     "authors": "Al Jubair, A., Hossain, M. Y., Sirajuddaula, M., et al. ",
     "journal": "Soft Computing",
     "doi": "https://doi.org/10.21203/rs.3.rs-9699913/v1",
-    "status": "Under review <br/>"
+    "status": "Under review",
+    "description": "<br/>"
   },
   {
     "title": "Genome Dosage Shapes Durable Disease Resistance in Polyploid Horticultural Crops.",
     "authors": "Sirajuddaula, M., Hossain, M.D., et al. ",
     "journal": "Horticulture, Environment and Biotechnology ",
-    "status": "Under review <br/>"
+    "status": "Under review"
   },
   {
     "title": "Symbiosis to Seed Quality: Harnessing Biological Nitrogen Fixation for Seed Germination, Vigour, And Shelf Life",
     "authors": "Deepo, D.M., Sirajuddaula, M., Hossain, M. et al. ",
     "journal": "Seeds",
     "doi": "https://doi.org/10.20944/preprints202611.1485.v1",
-    "status": "Under review <br/>"
+    "status": "Under review"
   },
   {
     "title": "Root Resilience Traits for Breeding Combined Stress-Tolerant Tomato: Mechanisms, Breeding Approaches, and Microbiome Integration",
     "authors": "Sirajuddaula, M., Siddique, A.B., Hossain, M.Y. et al. ",
     "journal": "Journal of Plant Growth Regulation ",
     "year": 0,
-    "status": "Under review <br/>"
+    "status": "Under review"
   },
   {
     "title": "Genome-wide identification, characterization, and expression profiling of the SAP gene family in cultivated strawberry (Fragaria × ananassa) in response to salt stress",
     "authors": "Sirajuddaula, M., Hossain, M.Y., Parveen, S. et al.",
-    "status": "In preparation <br/>"
+    "status": "In preparation"
   },
   {
     "title": "Meta-Analysis of Quantitative Trait Loci (QTL) Associated with Secondary Metabolites and Quality Attributes in a Beverage Crop",
     "authors": "Hossain, M., Sirajuddaula, M., Rana, S. et al. ",
-    "status": "In preparation <br/>"
+    "status": "In preparation"
   }
 ]
