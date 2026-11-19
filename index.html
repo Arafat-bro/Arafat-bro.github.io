@@ -31,8 +31,8 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light nav-bg fixed-top " id="sideNav">
             <a class="navbar-brand js-scroll-trigger" href="#page-top">
-                <span class="d-block d-lg-none">Muhammad Sirajuddaula</span>
-                <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="assets/img/profile.jpg" alt="..." /></span>
+                <span class="d-block d-lg-none" id="profileNavName">Muhammad Sirajuddaula (Arafat)</span>
+                <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" id="profileImage" src="assets/img/profile.jpg" alt="Profile photo of Muhammad Sirajuddaula (Arafat)" /></span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -56,7 +56,7 @@
             <section class="resume-section position-relative" id="about">
                 <div class="position-absolute top-0 end-0 mt-3 me-3 d-flex gap-2">
                 <!-- Download Button (Top Right Corner) -->
-                    <a href="./assets/docs/CV_Sirajuddaula_Bangladesh_2025.pdf" download class="btn btn-primary nav-bg border-0 text-light">
+                    <a id="downloadCv" href="./assets/docs/CV_Sirajuddaula_Bangladesh_2025.pdf" download class="btn btn-primary nav-bg border-0 text-light">
                         Download CV
                     </a>
                     <!-- portfolio/activities -->
@@ -66,19 +66,18 @@
                 </div>
                 
                 <div class="resume-section-content">
-                    <h1 class="mb-0">
-                        Muhammad
-                        <span class="text-primary">Sirajuddaula</span>
-                    </h1>
-                    <div class="subheading mb-5">
-                        Sher-e-Bangla Agricultural University · Dhaka, 1207 · +8801521256199 ·
-                        <a href="mailto:kbdarafat.sau78@gmail.com">kbdarafat.sau78@gmail.com</a>
+                    <h1 class="mb-0" id="profileName">Muhammad Sirajuddaula (Arafat)</h1>
+                    <div class="subheading mb-2" id="profileHeadline">
+                        Agriculture Graduate | MSc Student in Genetics and Plant Breeding
                     </div>
-                    <p class="lead mb-5">I'm highly motivated student seeking to pursue advanced research opportunities in plant-soil-environment synergy. Dedicated to advancing crop resilience through innovative experimentation and contributing to global agricultural sustainability.</p>
+                    <div class="subheading mb-5" id="profileLocation">
+                        Dhaka, Bangladesh
+                    </div>
+                    <p class="lead mb-5" id="profileBio">Research interests include plant genetics and genomics, comparative genomics, crop improvement, and molecular responses to environmental stress.</p>
                     <div class="social-icons">
-                        <a class="social-icon" href="https://www.linkedin.com/in/sirajuddaula-arafat/"><i class="fa-brands fa-linkedin fa-lg" ></i></a>
-                        <a class="social-icon" href="https://www.researchgate.net/profile/Muhammad-Sirajuddaula/research"><i class="fa-brands fa-researchgate fa-lg" ></i></a>
-                        <a class="social-icon" href="https://orcid.org/0009-0003-7154-0354"><i class="fa-brands fa-orcid fa-lg"></i></a>
+                        <a class="social-icon" id="profileLinkedIn" href="https://www.linkedin.com/in/sirajuddaula-arafat/" aria-label="LinkedIn"><i class="fa-brands fa-linkedin fa-lg" ></i></a>
+                        <a class="social-icon" id="profileResearchGate" href="https://www.researchgate.net/profile/Muhammad-Sirajuddaula/research" aria-label="ResearchGate"><i class="fa-brands fa-researchgate fa-lg" ></i></a>
+                        <a class="social-icon" id="profileOrcid" href="https://orcid.org/0009-0003-7154-0354" aria-label="ORCID"><i class="fa-brands fa-orcid fa-lg"></i></a>
                     </div>
                 </div>
             </section>

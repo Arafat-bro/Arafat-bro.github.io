@@ -1,59 +1,102 @@
-/*!
-* Start Bootstrap - Resume v7.0.6 (https://startbootstrap.com/theme/resume)
-* Copyright 2013-2023 Start Bootstrap
-* Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-resume/blob/master/LICENSE)
-*/
-//
-// Scripts
-// 
+window.addEventListener('DOMContentLoaded', () => {
 
-window.addEventListener('DOMContentLoaded', event => {
+    // Load profile information from Pages CMS
+    fetch('./content/profile.json', { cache: 'no-cache' })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Profile request failed: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(profile => {
 
-    // Activate Bootstrap scrollspy on the main nav element
-    const sideNav = document.body.querySelector('#sideNav');
-    if (sideNav) {
+            const setText = (id, value) => {
+                const element = document.getElementById(id);
+                if (element && typeof value === 'string') {
+                    element.textContent = value;
+                }
+            };
+
+            const setLink = (id, value) => {
+                const element = document.getElementById(id);
+                if (!element) return;
+
+                if (typeof value === 'string' && value.trim()) {
+                    element.href = value;
+                    element.hidden = false;
+                } else {
+                    element.hidden = true;
+                }
+            };
+
+            setText('profileName', profile.display_name);
+            setText('profileNavName', profile.display_name);
+            setText('profileHeadline', profile.headline);
+            setText('profileLocation', profile.location);
+            setText('profileBio', profile.bio);
+
+            const profileImage = document.getElementById('profileImage');
+            if (profileImage && profile.profile_image) {
+                profileImage.src = profile.profile_image;
+                profileImage.alt = `Profile photo of ${profile.display_name || 'the site owner'}`;
+            }
+
+            setLink('profileLinkedIn', profile.linkedin);
+            setLink('profileResearchGate', profile.researchgate);
+            setLink('profileOrcid', profile.orcid);
+            setLink('downloadCv', profile.cv_file);
+
+            if (profile.display_name) {
+                document.title = `${profile.display_name} | Academic Portfolio`;
+            }
+        })
+        .catch(error => {
+            console.error('Could not load CMS profile:', error);
+        });
+
+    // Bootstrap scroll navigation
+    const sideNav = document.querySelector('#sideNav');
+
+    if (sideNav && window.bootstrap?.ScrollSpy) {
         new bootstrap.ScrollSpy(document.body, {
             target: '#sideNav',
             rootMargin: '0px 0px -40%',
         });
-    };
+    }
 
-    // Collapse responsive navbar when toggler is visible
-    const navbarToggler = document.body.querySelector('.navbar-toggler');
-    const responsiveNavItems = [].slice.call(
-        document.querySelectorAll('#navbarResponsive .nav-link')
-    );
-    responsiveNavItems.map(function (responsiveNavItem) {
-        responsiveNavItem.addEventListener('click', () => {
-            if (window.getComputedStyle(navbarToggler).display !== 'none') {
+    // Close mobile navigation after selecting a section
+    const navbarToggler = document.querySelector('.navbar-toggler');
+    const responsiveNavItems = document.querySelectorAll('#navbarResponsive .nav-link');
+
+    responsiveNavItems.forEach(item => {
+        item.addEventListener('click', () => {
+            if (
+                navbarToggler &&
+                window.getComputedStyle(navbarToggler).display !== 'none'
+            ) {
                 navbarToggler.click();
             }
         });
     });
 
-});
-// script.js
-document.addEventListener("DOMContentLoaded", function () {
-    const goUpButton = document.getElementById("goUpButton");
+    // Scroll to top button
+    const goUpButton = document.getElementById('goUpButton');
 
-    // Show the button when the user scrolls down 200px
-    window.onscroll = function () {
-        if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
-            goUpButton.style.display = "block";
-        } else {
-            goUpButton.style.display = "none";
-        }
-    };
+    if (goUpButton) {
+        const updateGoUpButton = () => {
+            goUpButton.style.display =
+                window.scrollY > 500 ? 'block' : 'none';
+        };
 
-    // Scroll to the top when the button is clicked
-    goUpButton.addEventListener("click", function () {
-        document.body.scrollTop = 0; // For Safari
-        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE, and Opera
-    });
-});
-goUpButton.addEventListener("click", function () {
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
+        window.addEventListener('scroll', updateGoUpButton);
+
+        goUpButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        updateGoUpButton();
+    }
 });

@@ -1,0 +1,242 @@
+media:
+  - name: images
+    label: Images
+    input: assets/uploads
+    output: /assets/uploads
+    extensions:
+      - jpg
+      - jpeg
+      - png
+      - webp
+      - gif
+
+  - name: documents
+    label: Documents
+    input: assets/docs
+    output: /assets/docs
+    extensions:
+      - pdf
+
+content:
+  - name: profile
+    label: Personal Profile
+    type: file
+    path: content/profile.json
+    format: json
+    fields:
+      - name: display_name
+        label: Display Name
+        type: string
+        required: true
+
+      - name: headline
+        label: Academic Headline
+        type: text
+
+      - name: location
+        label: Location
+        type: string
+
+      - name: bio
+        label: Biography
+        type: rich-text
+
+      - name: profile_image
+        label: Profile Photograph
+        type: image
+
+      - name: linkedin
+        label: LinkedIn
+        type: string
+
+      - name: researchgate
+        label: ResearchGate
+        type: string
+
+      - name: orcid
+        label: ORCID
+        type: string
+
+      - name: cv_file
+        label: Current CV
+        type: file
+
+  - name: education
+    label: Education
+    type: collection
+    path: content/education
+    format: json
+    filename: "{slug}.json"
+    fields:
+      - name: slug
+        type: string
+        required: true
+      - name: degree
+        type: string
+        required: true
+      - name: institution
+        type: string
+      - name: department
+        type: string
+      - name: start_date
+        type: string
+      - name: end_date
+        type: string
+      - name: status
+        type: string
+      - name: grade
+        type: string
+      - name: description
+        type: text
+
+  - name: experience
+    label: Research and Employment
+    type: collection
+    path: content/experience
+    format: json
+    filename: "{slug}.json"
+    fields:
+      - name: slug
+        type: string
+        required: true
+      - name: position
+        type: string
+        required: true
+      - name: organization
+        type: string
+      - name: department
+        type: string
+      - name: start_date
+        type: string
+      - name: end_date
+        type: string
+      - name: description
+        type: rich-text
+
+  - name: publications
+    label: Publications
+    type: collection
+    path: content/publications
+    format: json
+    filename: "{slug}.json"
+    fields:
+      - name: slug
+        type: string
+        required: true
+      - name: title
+        type: string
+        required: true
+      - name: authors
+        type: text
+      - name: journal
+        type: string
+      - name: year
+        type: number
+      - name: doi
+        type: string
+      - name: url
+        type: string
+      - name: status
+        type: string
+      - name: description
+        type: text
+
+  - name: projects
+    label: Research Projects
+    type: collection
+    path: content/projects
+    format: json
+    filename: "{slug}.json"
+    fields:
+      - name: slug
+        type: string
+        required: true
+      - name: title
+        type: string
+        required: true
+      - name: role
+        type: string
+      - name: period
+        type: string
+      - name: status
+        type: string
+      - name: summary
+        type: rich-text
+      - name: methods
+        type: text
+
+  - name: updates
+    label: Research Updates
+    type: collection
+    path: content/updates
+    format: json
+    filename: "{slug}.json"
+    fields:
+      - name: slug
+        type: string
+        required: true
+      - name: title
+        type: string
+        required: true
+      - name: date
+        type: date
+      - name: category
+        type: string
+      - name: summary
+        type: text
+      - name: body
+        type: rich-text
+      - name: cover_image
+        type: image
+      - name: published
+        type: boolean
+
+  - name: awards
+    label: Awards and Certifications
+    type: collection
+    path: content/awards
+    format: json
+    filename: "{slug}.json"
+    fields:
+      - name: slug
+        type: string
+        required: true
+      - name: title
+        type: string
+        required: true
+      - name: issuer
+        type: string
+      - name: date
+        type: string
+      - name: description
+        type: text
+
+  - name: gallery
+    label: Research Gallery
+    type: collection
+    path: content/gallery
+    format: json
+    filename: "{slug}.json"
+    fields:
+      - name: slug
+        type: string
+        required: true
+      - name: title
+        type: string
+      - name: image
+        type: image
+      - name: caption
+        type: text
+      - name: date
+        type: string
+
+settings:
+  content:
+    merge: true
+  commit:
+    identity: app
+    templates:
+      create: "content: add {path}"
+      update: "content: update {path}"
+      delete: "content: delete {path}"
+      rename: "content: rename {oldPath}"
