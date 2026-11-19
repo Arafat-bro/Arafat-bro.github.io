@@ -1,12 +1,10 @@
 [
   {
-    "title": "Optimizing Lentil Yield: The Role of Genetic Diversity and Modern Breeding Approaches",
-    "journal": "Big Data in Agriculture",
-    "year": 2025,
-    "doi": "10.26480/bda.01.2025.20.24",
-    "url": "https://bigdatainagriculture.com/optimizing-lentil-yield-the-role-of-genetic-diversity-and-modern-breeding-approaches/",
-    "status": "Published",
-    "description": "Contributed to data analysis and manuscript formatting."
+    "title": "Foliar Application of Humic Acid and Ascorbic Acid Alleviates Salt Stress in Sweet Pepper (Capsicum annuum L.).",
+    "authors": "Zohora, F.T., Sirajuddaula, M., Akhter, S., Debnath, O., Hossain, IN., Rubel, M.A.A., Islam, N., Kabir, M. H.",
+    "journal": "Journal of Agriculture, Food and Environment",
+    "year": 2026,
+    "status": "Published"
   },
   {
     "title": "Growth and Physiological Response of Strawberry under Salt Stress: Role of Glycine Betaine and Seaweed Extract.",
@@ -17,11 +15,13 @@
     "status": "Published"
   },
   {
-    "title": "Foliar Application of Humic Acid and Ascorbic Acid Alleviates Salt Stress in Sweet Pepper (Capsicum annuum L.).",
-    "authors": "Zohora, F.T., Sirajuddaula, M., Akhter, S., Debnath, O., Hossain, IN., Rubel, M.A.A., Islam, N., Kabir, M. H.",
-    "journal": "Journal of Agriculture, Food and Environment",
-    "year": 2026,
-    "status": "Published"
+    "title": "Optimizing Lentil Yield: The Role of Genetic Diversity and Modern Breeding Approaches",
+    "journal": "Big Data in Agriculture",
+    "year": 2025,
+    "doi": "10.26480/bda.01.2025.20.24",
+    "url": "https://bigdatainagriculture.com/optimizing-lentil-yield-the-role-of-genetic-diversity-and-modern-breeding-approaches/",
+    "status": "Published",
+    "description": "Contributed to data analysis and manuscript formatting."
   },
   {
     "title": "A TensorFlow-Based CNN Model for Widespread Detection of Rice and Potato Leaf Diseases.",
