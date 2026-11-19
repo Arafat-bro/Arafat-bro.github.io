@@ -12,6 +12,12 @@
     ]
   },
   {
+    "category": "Field & Experimental Skills",
+    "items": [
+      "SPAD measurement, field data collection, experimental design, abiotic stress experiments following lab protocols"
+    ]
+  },
+  {
     "category": "Software Proficiency",
     "items": [
       "Microsoft Word",
@@ -19,12 +25,6 @@
       "Microsoft PowerPoint",
       "Canva",
       "R"
-    ]
-  },
-  {
-    "category": "Field & Experimental Skills",
-    "items": [
-      "SPAD measurement, field data collection, experimental design, abiotic stress experiments following lab protocols"
     ]
   }
 ]
