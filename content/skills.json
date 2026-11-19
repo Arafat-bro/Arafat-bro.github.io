@@ -1,21 +1,14 @@
 [
   {
-    "category": "Lab and Field Skills",
+    "category": "Bioinformatics & Programming",
     "items": [
-      "Fluorescence measurement",
-      "Handling SPAD meter, moisture meter, EC meter, and centrifuge",
-      "Spectrophotometer handling",
-      "Crop morphological data collection",
-      "Practical understanding of experimental methodology"
+      "R (RStudio), Python, Linux (Bash), BLAST, TBtools, HMMER3, MCScanX, PlantCare, BUSCO, miniprot, ggplot2, Git/Github, primer design"
     ]
   },
   {
-    "category": "Data Analysis",
+    "category": "Wet Lab Techniques",
     "items": [
-      "R programming and RStudio",
-      "SPSS",
-      "Basic GIS and ArcGIS",
-      "Basic Python"
+      "DNA/RNA extraction, qRT-PCR, Gel electrophoresis, Spectrophotometry, Centrifugation, Plant tissue culture"
     ]
   },
   {
@@ -26,6 +19,12 @@
       "Microsoft PowerPoint",
       "Canva",
       "R"
+    ]
+  },
+  {
+    "category": "Field & Experimental Skills",
+    "items": [
+      "SPAD measurement, field data collection, experimental design, abiotic stress experiments following lab protocols"
     ]
   }
 ]
